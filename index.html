@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Good Health | Services Menu</title>
+
+  <!-- Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --orange: #c07a1c;
+      --grey: #d4d4d4;
+      --black: #000000;
+      --cyan: #32866b;
+      --bordeaux: #84042f;
+      --white: #ffffff;
+      --cream: #fbfaf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 24px auto 64px;
+      border: 2px solid var(--black);
+      border-radius: 34px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .hero {
+      min-height: 94vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 70px 28px;
+      background:
+        radial-gradient(circle at top left, rgba(192, 122, 28, 0.10), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(50, 134, 107, 0.10), transparent 30%),
+        #ffffff;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(50px, 9vw, 112px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 600px;
+      margin: 26px auto 0;
+      color: rgba(0, 0, 0, 0.68);
+      font-size: clamp(14px, 1.7vw, 18px);
+    }
+
+    .scroll-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 42px;
+      padding: 13px 18px;
+      border: 1px solid var(--black);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .scroll-btn:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .services {
+      padding: 52px;
+      border-top: 2px solid var(--black);
+      background: var(--cream);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      color: var(--bordeaux);
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 64px);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+
+    .brand-line {
+      width: min(210px, 34vw);
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--cyan), var(--bordeaux));
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1.5px solid var(--black);
+      border-radius: 24px;
+      padding: 22px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.08);
+    }
+
+    .wide-card {
+      grid-column: span 2;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      border: 1.5px solid var(--black);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      background: var(--white);
+    }
+
+    .icon-box svg {
+      width: 23px;
+      height: 23px;
+      stroke-width: 1.7;
+    }
+
+    .orange { color: var(--orange); }
+    .cyan { color: var(--cyan); }
+    .bordeaux { color: var(--bordeaux); }
+    .black { color: var(--black); }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .service-text {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.70);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 9px;
+      border: 1px solid var(--grey);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--white);
+    }
+
+    .footer {
+      border-top: 2px solid var(--black);
+      background: var(--black);
+      color: var(--white);
+      padding: 28px 52px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer strong {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .footer span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    @media (max-width: 900px) {
+      .services {
+        padding: 34px 22px;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .wide-card {
+        grid-column: span 2;
+      }
+
+      .footer {
+        padding: 24px 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: calc(100% - 18px);
+        margin-top: 9px;
+        border-radius: 24px;
+      }
+
+      .hero {
+        min-height: 88vh;
+        padding: 56px 20px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide-card {
+        grid-column: span 1;
+      }
+
+      .service-card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">In Good Health</p>
+        <h1>Services<br>Menu</h1>
+        <p class="hero-copy">
+          A curated wellness and medical services menu designed with a clean,
+          premium editorial feel.
+        </p>
+
+        <a href="#our-services" class="scroll-btn">
+          View our services
+          <i data-lucide="arrow-down"></i>
+        </a>
+      </div>
+    </section>
+
+    <section id="our-services" class="services">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Our Services</p>
+          <h2>Wellness, Recovery<br>& Longevity</h2>
+        </div>
+        <div class="brand-line"></div>
+      </div>
+
+      <div class="menu-grid">
+
+        <article class="service-card wide-card">
+          <div>
+            <div class="icon-box orange"><i data-lucide="droplets"></i></div>
+            <h3>IV Drips</h3>
+            <p class="service-text">
+              Targeted IV formulas designed to support hydration, energy,
+              recovery, beauty, immunity, gut health, sleep, and overall wellness.
+            </p>
+          </div>
+
+          <div class="tag-list">
+            <span class="tag">Rehydration</span>
+            <span class="tag">Energy</span>
+            <span class="tag">Immune Potion</span>
+            <span class="tag">Hair Booster</span>
+            <span class="tag">Hangover</span>
+            <span class="tag">Detox</span>
+            <span class="tag">Glutathione</span>
+            <span class="tag">Sleep Booster</span>
+            <span class="tag">Gut Health</span>
+            <span class="tag">Collagen Boost</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><i data-lucide="gauge"></i></div>
+          <h3>HBOT</h3>
+          <p class="service-text">
+            Hyperbaric oxygen therapy service for recovery, performance support,
+            and wellness-focused oxygen exposure.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><i data-lucide="waves"></i></div>
+          <h3>Ozone Sauna</h3>
+          <p class="service-text">
+            A wellness sauna experience combining heat and ozone-based protocols
+            in a controlled setting.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="syringe"></i></div>
+          <h3>Ozone IV</h3>
+          <p class="service-text">
+            Intravenous ozone service offered as part of personalized wellness
+            and optimization protocols.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><i data-lucide="activity"></i></div>
+          <h3>Pressotherapy</h3>
+          <p class="service-text">
+            Compression-based therapy designed to support circulation, drainage,
+            and post-treatment recovery.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><i data-lucide="scan-line"></i></div>
+          <h3>Oligoscan</h3>
+          <p class="service-text">
+            A quick scan-style assessment used to help evaluate selected wellness
+            and mineral-related indicators.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="scale"></i></div>
+          <h3>InBody</h3>
+          <p class="service-text">
+            Body composition analysis to help understand muscle mass, body fat,
+            water balance, and progress markers.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><i data-lucide="route"></i></div>
+          <h3>Lymphatic Drainage</h3>
+          <p class="service-text">
+            Gentle drainage-focused care designed to support fluid movement,
+            recovery, and a lighter body sensation.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><i data-lucide="person-standing"></i></div>
+          <h3>Physical Therapy</h3>
+          <p class="service-text">
+            Movement, rehabilitation, and recovery sessions tailored to functional
+            improvement and injury prevention.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="heart-pulse"></i></div>
+          <h3>Perineal Rehabilitation</h3>
+          <p class="service-text">
+            Specialized rehabilitation service focused on pelvic floor and
+            perineal health support.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><i data-lucide="apple"></i></div>
+          <h3>Dietitian Consultation</h3>
+          <p class="service-text">
+            Personalized nutrition guidance for lifestyle, health goals, recovery,
+            and body composition support.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><i data-lucide="stethoscope"></i></div>
+          <h3>Physicians' Consultation</h3>
+          <p class="service-text">
+            Medical consultation sessions for assessment, guidance, and care
+            planning with a physician.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="refresh-cw"></i></div>
+          <h3>HRT</h3>
+          <p class="service-text">
+            Hormone replacement therapy consultation and care pathway for eligible
+            patients under medical supervision.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><i data-lucide="mars"></i></div>
+          <h3>TRT</h3>
+          <p class="service-text">
+            Testosterone replacement therapy consultation and care pathway for
+            eligible patients under medical supervision.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>In Good Health</strong>
+      <span>Services Menu · Wellness · Recovery · Longevity</span>
+    </footer>
+
+  </main>
+
+  <script>
+    lucide.createIcons({
+      attrs: {
+        "stroke-width": 1.7
+      }
+    });
+  </script>
+
+</body>
+</html>
