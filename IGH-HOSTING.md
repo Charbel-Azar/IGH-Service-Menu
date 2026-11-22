@@ -1,4 +1,19 @@
-# Deploying a new IGH website
+# IGH cPanel hosting
+
+## Resume the existing connection
+
+| Website | Last verified on 22 November 2026 | Project runbook |
+| --- | --- | --- |
+| [Service Menu](https://www.ighclinic.com/Services-Menu/) | Automatic production publishing enabled on `master` | [Service Menu deployment](DEPLOYMENT.md) |
+| [IGH clinic website](https://www.ighclinic.com/) | Staging verified on `main`. Production activation awaits explicit approval. | [Clinic website deployment](https://github.com/Charbel-Azar/IGH-minimal-website/blob/main/DEPLOYMENT.md) |
+
+Both repositories use GitHub Actions to advance their own `cpanel-release`
+branch after validation. Independent five-minute jobs in [cPanel](https://ighclinic.com/cpanel)
+pull those releases. Confirm the specific site's mode in **Advanced → Cron Jobs**
+when returning to this setup. Use the project runbooks for the exact commands,
+verification, and rollback. The clinic repository requires authorized GitHub access.
+
+## Deploy a new IGH project
 
 Use this runbook when creating a GitHub repository and hosting a new IGH project
 on the existing cPanel account. The [Service Menu deployment](DEPLOYMENT.md)
