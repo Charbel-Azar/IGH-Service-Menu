@@ -1,0 +1,62 @@
+name: Validate and publish Service Menu release
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - name: Validate website files
+        run: |
+          bash -n ops/pull-service-menu.sh
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          page = Path("index.html").read_text()
+          assert "<title>In Good Health | Services Menu</title>" in page
+          assert 'id="our-services"' in page
+          for value in re.findall(r'(?:src=|href=|url[(])["\x27]([^"\x27]+)', page):
+              url = urlsplit(value)
+              if url.scheme or url.netloc or not url.path:
+                  continue
+              path = Path(unquote(url.path))
+              if path.is_absolute() or ".." in path.parts or not path.is_file():
+                  raise SystemExit(f"Invalid local reference: {value}")
+          PY
+
+  publish:
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: service-menu-release
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Publish the validated commit for cPanel to pull
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -eu
+          latest=$(git ls-remote origin refs/heads/master | cut -f1)
+          test -n "$latest"
+          if [ "$latest" != "$RELEASE_SHA" ]; then
+            echo "A newer production commit is already queued for validation."
+            exit 0
+          fi
+          git push origin "$RELEASE_SHA:refs/heads/cpanel-release"

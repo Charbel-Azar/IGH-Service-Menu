@@ -55,14 +55,32 @@
 
     .hero {
       min-height: 94vh;
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
       text-align: center;
-      padding: 70px 28px;
+      padding: 28px;
       background:
         radial-gradient(circle at top left, rgba(192, 122, 28, 0.10), transparent 32%),
         radial-gradient(circle at bottom right, rgba(50, 134, 107, 0.10), transparent 30%),
         #ffffff;
+    }
+
+    .hero-top {
+      flex: 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-mid {
+      flex: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-bottom {
+      flex: 1;
+      display: grid;
+      place-items: center;
     }
 
     .eyebrow {
@@ -78,7 +96,7 @@
       font-size: clamp(50px, 9vw, 112px);
       font-weight: 500;
       letter-spacing: -0.065em;
-      line-height: 0.92;
+      line-height: 1.12;
       text-transform: uppercase;
     }
 
@@ -120,14 +138,16 @@
     .brand-logo {
       display: block;
       width: fit-content;
-      margin: 0 auto 30px;
+      margin: 0 auto;
       transition: 0.25s ease;
     }
 
     .brand-logo img {
       display: block;
-      height: clamp(84px, 14vw, 150px);
-      width: auto;
+      width: clamp(164px, 27vw, 292px);
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
     }
 
     .brand-logo:hover {
@@ -212,6 +232,32 @@
       stroke-width: 1.7;
     }
 
+    .icon-box img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    /* Brand-colored flat icons (recolored via mask, inherits icon-box color) */
+    .icon-mask {
+      width: 26px;
+      height: 26px;
+      background-color: currentColor;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+
+    .m-facials { -webkit-mask-image: url("icons/facials.png"); mask-image: url("icons/facials.png"); }
+    .m-prp { -webkit-mask-image: url("icons/prp.png"); mask-image: url("icons/prp.png"); }
+    .m-cupping { -webkit-mask-image: url("icons/cupping.png"); mask-image: url("icons/cupping.png"); }
+    .m-needling { -webkit-mask-image: url("icons/dry-needling.png"); mask-image: url("icons/dry-needling.png"); }
+    .m-genetic { -webkit-mask-image: url("icons/genetic.png"); mask-image: url("icons/genetic.png"); }
+    .m-infrared { -webkit-mask-image: url("icons/infrared.png"); mask-image: url("icons/infrared.png"); }
+
     .orange { color: var(--orange); }
     .cyan { color: var(--cyan); }
     .bordeaux { color: var(--bordeaux); }
@@ -230,6 +276,13 @@
       color: rgba(0, 0, 0, 0.70);
       line-height: 1.55;
       margin-bottom: 18px;
+    }
+
+    .service-tagline {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
     }
 
     .tag-list {
@@ -359,7 +412,7 @@
   <main class="page">
 
     <section class="hero">
-      <div>
+      <div class="hero-top">
         <a
           class="brand-logo"
           href="https://www.ighclinic.com/"
@@ -367,15 +420,15 @@
           rel="noopener noreferrer"
           aria-label="In Good Health — visit website"
         >
-          <img src="logo-IGH.png" alt="In Good Health (IGH) logo" />
+          <img src="logo-IGH.png" alt="IGH In Good Health — Predictive, Preventive, Integrative Medicine" />
         </a>
-        <p class="eyebrow">In Good Health</p>
-        <h1>Services<br>Menu</h1>
-        <p class="hero-copy">
-          A curated wellness and medical services menu designed with a clean,
-          premium editorial feel.
-        </p>
+      </div>
 
+      <div class="hero-mid">
+        <h1>Services<br>Menu</h1>
+      </div>
+
+      <div class="hero-bottom">
         <a href="#our-services" class="scroll-btn">
           View our services
           <i data-lucide="arrow-down"></i>
@@ -389,7 +442,6 @@
           <p class="section-kicker">Our Services</p>
           <h2>Wellness, Recovery<br>& Longevity</h2>
         </div>
-        <div class="brand-line"></div>
       </div>
 
       <div class="menu-grid">
@@ -415,6 +467,7 @@
             <span class="tag">Sleep Booster</span>
             <span class="tag">Gut Health</span>
             <span class="tag">Collagen Boost</span>
+            <span class="tag">& So Much More</span>
           </div>
         </article>
 
@@ -446,11 +499,75 @@
         </article>
 
         <article class="service-card">
-          <div class="icon-box cyan"><i data-lucide="activity"></i></div>
+          <div class="icon-box cyan"><span class="icon-mask m-infrared"></span></div>
+          <h3>Infrared Sauna Blanket</h3>
+          <p class="service-text">
+            Relaxing infrared heat therapy that supports detoxification, circulation,
+            and recovery while encouraging deep relaxation and post-exercise wellness.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><i data-lucide="footprints"></i></div>
           <h3>Pressotherapy</h3>
           <p class="service-text">
             Compression-based therapy designed to support circulation, drainage,
             and post-treatment recovery.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="route"></i></div>
+          <h3>Lymphatic Drainage</h3>
+          <p class="service-text">
+            Gentle drainage-focused care designed to support fluid movement,
+            recovery, and a lighter body sensation.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><span class="icon-mask m-cupping"></span></div>
+          <h3>Cupping</h3>
+          <p class="service-text">
+            A therapeutic technique that promotes circulation, relieves muscle
+            tension, and supports recovery, reducing pain and improving mobility.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box bordeaux"><span class="icon-mask m-needling"></span></div>
+          <h3>Dry Needling</h3>
+          <p class="service-text">
+            A targeted treatment that releases muscle trigger points to reduce
+            pain and restore movement, ideal for injuries and sports recovery.
+          </p>
+        </article>
+
+        <article class="service-card" id="chinese-medicine">
+          <div class="icon-box orange"><i data-lucide="sparkles"></i></div>
+          <h3>Chinese Medicine | Acupuncture</h3>
+          <p class="service-tagline">Ancient practice. Modern wellbeing.</p>
+          <p class="service-text">
+            A personalized approach using acupuncture to support pain relief, stress
+            management, better sleep, circulation and overall balance.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box orange"><i data-lucide="person-standing"></i></div>
+          <h3>Physical Therapy</h3>
+          <p class="service-text">
+            Movement, rehabilitation, and recovery sessions tailored to functional
+            improvement and injury prevention.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon-box cyan"><img src="kidneys%20(1).png" alt="Perineal rehabilitation" /></div>
+          <h3>Perineal Rehabilitation</h3>
+          <p class="service-text">
+            Specialized rehabilitation service focused on pelvic floor and
+            perineal health support.
           </p>
         </article>
 
@@ -473,29 +590,29 @@
         </article>
 
         <article class="service-card">
-          <div class="icon-box cyan"><i data-lucide="route"></i></div>
-          <h3>Lymphatic Drainage</h3>
+          <div class="icon-box cyan"><span class="icon-mask m-genetic"></span></div>
+          <h3>Genetic Profiling</h3>
           <p class="service-text">
-            Gentle drainage-focused care designed to support fluid movement,
-            recovery, and a lighter body sensation.
+            Personalized DNA analysis that identifies genetic predispositions across
+            health, nutrition, fitness, and longevity to guide preventive strategies.
           </p>
         </article>
 
         <article class="service-card">
-          <div class="icon-box bordeaux"><i data-lucide="person-standing"></i></div>
-          <h3>Physical Therapy</h3>
+          <div class="icon-box bordeaux"><span class="icon-mask m-facials"></span></div>
+          <h3>Facials</h3>
           <p class="service-text">
-            Movement, rehabilitation, and recovery sessions tailored to functional
-            improvement and injury prevention.
+            Medical-grade facial treatments that restore skin health, hydration,
+            and glow, addressing acne, pigmentation, fine lines, and rejuvenation.
           </p>
         </article>
 
         <article class="service-card">
-          <div class="icon-box orange"><i data-lucide="heart-pulse"></i></div>
-          <h3>Perineal Rehabilitation</h3>
+          <div class="icon-box orange"><span class="icon-mask m-prp"></span></div>
+          <h3>PRP &amp; Exosomes</h3>
           <p class="service-text">
-            Specialized rehabilitation service focused on pelvic floor and
-            perineal health support.
+            Advanced regenerative therapy for hair, face &amp; neck that stimulates
+            natural healing and collagen for improved texture, elasticity, and youth.
           </p>
         </article>
 
@@ -508,12 +625,13 @@
           </p>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" id="physicians-consultations">
           <div class="icon-box bordeaux"><i data-lucide="stethoscope"></i></div>
-          <h3>Physicians' Consultation</h3>
+          <h3>Physicians&rsquo; Consultations</h3>
+          <p class="service-tagline">Expert care. Multiple specialties. One destination.</p>
           <p class="service-text">
-            Medical consultation sessions for assessment, guidance, and care
-            planning with a physician.
+            Access a multidisciplinary team of physicians for personalized consultations,
+            prevention, diagnosis and long-term health optimization.
           </p>
         </article>
 
@@ -541,7 +659,7 @@
     <footer class="footer">
       <div class="footer-brand">
         <strong>In Good Health</strong>
-        <span>Medical Center · Allenby, Beirut</span>
+        <span>Medical Wellness Hub</span>
       </div>
 
       <nav class="contact">
@@ -551,10 +669,10 @@
         <a href="https://www.instagram.com/ingoodhealthclinic/" target="_blank" rel="noopener noreferrer">
           <i data-lucide="instagram"></i> @ingoodhealthclinic
         </a>
-        <a href="tel:+9611970220">
-          <i data-lucide="phone"></i> 01 970 220
+        <a href="https://wa.me/96171822550" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="message-circle"></i> 71 822 550
         </a>
-        <a href="https://maps.google.com/?q=In+Good+Health+Clinic,+Allenby,+Beirut" target="_blank" rel="noopener noreferrer">
+        <a href="https://maps.app.goo.gl/23WvFJtuDH5y8bdN6" target="_blank" rel="noopener noreferrer">
           <i data-lucide="map-pin"></i> Allenby, Beirut
         </a>
       </nav>
