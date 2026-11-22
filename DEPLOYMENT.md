@@ -23,6 +23,30 @@ at `production`. Consult `/home/ighclinic/.igh-service-menu-deploy/deploy.log`
 for confirmed file changes. After a run, verify the public HTTPS page and
 assets, the requested content, and the main clinic homepage and services route.
 
+
+## Last verified on 22 November 2026
+
+**Production publishing enabled.** The first production cron run returned
+successfully at 16:30 Beirut time. The initial GitHub baseline was taken from
+the live site, and the production check preserved that content.
+
+In [cPanel](https://ighclinic.com/cpanel), open **Advanced → Cron Jobs** and
+look for the job below. Its schedule is `*/5 * * * *`.
+
+```sh
+/bin/bash /home/ighclinic/igh-service-menu-publisher.sh production >> /home/ighclinic/igh-service-menu-cron.log 2>&1 && /usr/bin/touch /home/ighclinic/.igh-service-menu-deploy/production-ok
+```
+
+The installed script corresponds to [the repository publisher](ops/pull-service-menu.sh).
+In cPanel File Manager, check the timestamp on `production-ok` to confirm
+a successful scheduled run, including a run where the files already match.
+Check `/home/ighclinic/igh-service-menu-cron.log` for errors. The publisher's
+`deploy.log` records runs that changed files. Then verify the public menu
+and assets against the approved release.
+
+For the main clinic site and new IGH projects, start with
+[IGH-HOSTING.md](IGH-HOSTING.md).
+
 ## Rollback
 
 Revert the affected commit through a pull request to `master` and allow the
